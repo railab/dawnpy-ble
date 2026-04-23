@@ -1,0 +1,24 @@
+metadata:
+  title: BLE profile AIOS wrapped binding test fixture
+  version: "1.0"
+
+ios:
+- &aios_gpi1
+  id: aios_gpi1
+  type: gpi
+  dtype: bool
+  config:
+    device: 0
+
+protocols:
+- id: nimble1
+  type: nimble
+  config:
+    gap_name: ntfc-nimble
+    services:
+      aios:
+        groups:
+        - digital_inputs:
+          - data: *aios_gpi1
+            metadata:
+              user_description: "input 1"

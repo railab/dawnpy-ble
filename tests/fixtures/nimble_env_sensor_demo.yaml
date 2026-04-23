@@ -1,0 +1,74 @@
+metadata:
+  title: BLE profile duplicate binding test fixture
+  version: "1.0"
+
+ios:
+- &battery_level_io
+  id: dummyio1
+  type: dummy_notify
+  dtype: uint8
+  config:
+    init_value: 42
+    interval_us: 20000
+- &analog_input_io
+  id: dummyio2
+  type: dummy
+  dtype: float
+  config:
+    init_value: 100.0
+- &humidity_io
+  id: humidity1
+  type: sensor
+  dtype: float
+  config:
+    device: 0
+  subtype: hum
+- &temperature_io
+  id: temp1
+  type: sensor
+  dtype: float
+  config:
+    device: 0
+  subtype: temp
+- &pressure_io
+  id: barometer1
+  type: sensor
+  dtype: float
+  config:
+    device: 0
+  subtype: baro
+- &gas_io
+  id: gas1
+  type: sensor
+  dtype: float
+  config:
+    device: 0
+  subtype: gas
+
+protocols:
+- id: nimble1
+  type: nimble
+  config:
+    gap_name: thingy53
+    services:
+      bas:
+        battery_level: *battery_level_io
+      aios:
+        groups:
+        - analog_inputs:
+          - *analog_input_io
+      ess:
+        characteristics:
+        - type: humidity
+          data: *humidity_io
+        - type: temperature
+          data: *temperature_io
+        - type: pressure
+          data: *pressure_io
+        - type: gas_resistance
+          data: *gas_io
+      imds:
+        humidity: *humidity_io
+        temperature: *temperature_io
+        pressure: *pressure_io
+        gas_resistance: *gas_io
