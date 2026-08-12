@@ -30,6 +30,9 @@ _SENSOR_SPECS = {
         "<h",
         1.0,
     ),
+    "co2": ("00002b8c-0000-1000-8000-00805f9b34fb", "<H", 1.0),
+    # VOC Concentration is ppb on air; the IO value is ppm.
+    "tvoc": ("00002be7-0000-1000-8000-00805f9b34fb", "<H", 1000.0),
 }
 _AIOS_GROUP_ORDER = (
     ("digital_inputs", DIGITAL_CHAR_UUID, False),
